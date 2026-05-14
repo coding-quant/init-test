@@ -2,6 +2,7 @@ package com.example.demo.processing.domain.importbif.model;
 
 import com.example.demo.processing.domain.common.model.BifKind;
 import com.example.demo.processing.domain.common.model.BifStatus;
+import com.example.demo.processing.domain.common.model.BlockContent;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -53,5 +54,9 @@ public class ImportBif {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BIF_METADATA_ID")
     BifMetadataEntity bifMetadata;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "block_content_id")
+    BlockContent blockContent;
 
 }
