@@ -10,10 +10,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(SftpProperties.class)
 @RequiredArgsConstructor
-Slf4j
+@Slf4j
 public class ScanSftpIntegrationFlow {
 
     public static final String SFTP_POLLER_ID = "sftpPollerId";
 
     private final SftpProperties properties;
+    private final SeenFileHandler handler;
+
+    private static final String BIF_INFO_CHANNEL = "bifInfoChannel";
+    private static final String ERROR_CHANNEL = "errorChannel";
 }
