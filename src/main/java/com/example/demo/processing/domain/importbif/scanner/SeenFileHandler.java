@@ -8,7 +8,6 @@ import org.springframework.integration.sftp.session.SftpFileInfo;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.util.List;
 
 @Component
@@ -26,13 +25,14 @@ public class SeenFileHandler {
         return !repository.existsByMemberIdAndFileName(memberId, fileName);
     }
 
+    public boolean doesNotExist(String memberId, String dirName, String fileName) {
+        return !repository.existsByMemberIdAndDirNameAndFileName(memberId, dirName, fileName);
+    }
+
     @Transactional
     public void save(ImportBif importBif) {
         log.info("Saving importBif {}", importBif);
         repository.save(importBif);
 
     }
-
-
-
 }

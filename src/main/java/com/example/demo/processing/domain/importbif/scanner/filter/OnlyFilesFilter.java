@@ -14,7 +14,7 @@ public class OnlyFilesFilter implements FileListFilter<SftpClient.DirEntry> {
 
     @Override
     public List<SftpClient.DirEntry> filterFiles(SftpClient.DirEntry[] dirEntries) {
-        if(dirEntries == null) List.of();
+        if (dirEntries == null) return List.of();
         return Arrays.stream(dirEntries).filter(e -> !e.getAttributes().isDirectory())
                 .toList();
     }
