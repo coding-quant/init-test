@@ -25,9 +25,6 @@ public class SeenFileHandler {
         return !repository.existsByMemberIdAndFileName(memberId, fileName);
     }
 
-    public boolean doesNotExist(String memberId, String dirName, String fileName) {
-        return !repository.existsByMemberIdAndDirNameAndFileName(memberId, dirName, fileName);
-    }
 
     @Transactional
     public void save(ImportBif importBif) {
