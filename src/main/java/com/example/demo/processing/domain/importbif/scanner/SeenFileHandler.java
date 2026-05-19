@@ -25,11 +25,9 @@ public class SeenFileHandler {
         return !repository.existsByMemberIdAndFileName(memberId, fileName);
     }
 
-
     @Transactional
     public void save(ImportBif importBif) {
         log.info("Saving importBif {}", importBif);
         repository.save(importBif);
-
     }
 }

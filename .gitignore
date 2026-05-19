@@ -34,3 +34,4 @@ build/
 
 ### Local SFTP test data ###
 .local-sftp/
+src/main/resources/keys/

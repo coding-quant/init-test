@@ -10,6 +10,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -55,8 +57,15 @@ public class ImportBif {
     @JoinColumn(name = "BIF_METADATA_ID")
     BifMetadataEntity bifMetadata;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "block_content_id")
-    BlockContent blockContent;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "IMPORT_BIF_ID")
+    List<BlockContent> blockContents = new ArrayList<>();
+
+    public void addBlockContent(BlockContent blockContent) {
+        blockContents.add(blockContent);
+    }
 
 }

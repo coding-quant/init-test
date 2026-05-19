@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,6 +32,8 @@ public class BlockContent {
    @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private String content;
 
    @Column(updatable = false)
