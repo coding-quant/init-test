@@ -1,0 +1,16 @@
+services:
+  sftp:
+    image: atmoz/sftp:latest
+    container_name: demo-local-sftp
+    ports:
+      - "2222:22"
+    volumes:
+      - ./.local-sftp/data/16000003/IMPORT/EUELIXIR:/home/16000003/IMPORT/EUELIXIR
+      - ./.local-sftp/data/16000003/BACKUP/EUELIXIR:/home/16000003/BACKUP/EUELIXIR
+      - ./.local-sftp/data/16001505/IMPORT/EUELIXIR:/home/16001505/IMPORT/EUELIXIR
+      - ./.local-sftp/data/16001505/BACKUP/EUELIXIR:/home/16001505/BACKUP/EUELIXIR
+      - ./src/main/resources/keys/user1_ed25519.pub:/home/16000003/.ssh/keys/id_ed25519.pub:ro
+      - ./src/main/resources/keys/user2_ed25519.pub:/home/16001505/.ssh/keys/id_ed25519.pub:ro
+    command: >
+      16000003::1001:1001:IMPORT/EUELIXIR,BACKUP/EUELIXIR
+      16001505::1002:1002:IMPORT/EUELIXIR,BACKUP/EUELIXIR

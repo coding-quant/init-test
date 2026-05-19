@@ -1,0 +1,36 @@
+sftp:
+  enable: true
+  setAllowUnknownKeys: true
+  poolSizePerUser: 1
+  sessionsWaitTimeout: 5000
+  pollerInterval: 60000
+  users:
+    # Konfiguracja dla użytkownika 16000003
+    '16000003':
+      privateKeyPath: "classpath:keys/user1_ed25519"
+      host: "localhost"
+      port: 2222
+      kind: "SEPA_SCT"
+      acceptFiles:
+        - type: "OUT_SCT_MESSAGE"
+          regexp: "EE[pPtT](?<settlementNumber>\\w{8})OUT(?<bifId>\\w{5})\\.(?<setType>\\w{3})CVN\\.CV\\w{1,3}.*"
+        - type: "REJ_BIF_MESSAGE"
+          regexp: "(?<setType>IX)(?<settlementNumber>\\w{8})(?<setNumber>\\w{5})*"
+      directories:
+        - "/IMPORT/EUELIXIR"
+        - "/BACKUP/EUELIXIR"
+
+    # Konfiguracja dla użytkownika 16001505
+    '16001505':
+      privateKeyPath: "classpath:keys/user2_ed25519"
+      host: "localhost"
+      port: 2222
+      kind: "SEPA_SCT"
+      acceptFiles:
+        - type: "OUT_SCT_MESSAGE"
+          regexp: "EE[pPtT](?<settlementNumber>\\w{8})OUT(?<bifId>\\w{5})\\.(?<setType>\\w{3})CVN\\.CV\\w{1,3}.*"
+        - type: "REJ_BIF_MESSAGE"
+          regexp: "(?<setType>IX)(?<settlementNumber>\\w{8})(?<setNumber>\\w{5})*"
+      directories:
+        - "/IMPORT/EUELIXIR"
+        - "/BACKUP/EUELIXIR"
